@@ -241,3 +241,23 @@ Physics 示例使用的标量字符串读取 `feature.getString(property)` 已�
 
 ## 几何与专业分析补充索引
 几何重要API的本机5.6章节、对象/输入/顺序和状态见geometry_modeling.md，具体Rectangle/Polygon调用见examples。模型createUnique在现有1D基线实测；其他几何对象的文档存在不代表运行通过。材料、Multiphysics、具体网格/Study特征和专业表达式需physics_and_solver.md指定的逐项卡片；未知键标PENDING，不以方向名称冒充API。mphplot先核实本机mli/mphplot.m及5.6同名LiveLink章节的输入输出再使用。
+
+
+## Polygon实际调用与边界查询证据（2026-11-01）
+特定项目的createUnique、param.set/get/evaluate、Polygon source/vectors/x/y/type/geom.run、getVertexCoord、getAdj(1,0,id)、getN*、getBoundingBox、measureFinal选择/getVolume、mphgeom(build=on)及mphsave均有实际调用，见 [证据流程](validated_curved_beam_workflow.md)。getVertexCoord返回sdim×顶点数；getAdj返回1-based邻接实体，不假定实体排序。重建实际闭环后独立验收，原生面积不单独作为标准。其余卡片仍按自身验证边界，不因方法名相同推广到任意模块/模型。
+
+
+## FM-001～006：Case 4 实际API复用卡片（5.6 Build 280）
+主记录[VS-012/Case 4](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)；以下VERIFIED只限对应调用，不升级早期通用模板。创建/求解改变新模型，提取/读回不新求解；全局知识编辑不授权调用。
+
+|编号/对象顺序|实际输入、输出/检查|源文件与限制|
+|---|---|---|
+|FM-001 材料→Solid→约束/载荷→Damping|Common/def: youngsmodulus/poissonsratio/density/lossfactor引用cfg同步参数；SolidMechanics；Type2D=PlaneStress、d=b；Fixed(dim1)、BoundaryLoad(dim1)的LoadType=TotalForce及Ftot向量；lemm1下Damping(dim2)/IsotropicLossFactor/eta_s_mat=from_mat；回读实际字符串和选择|[abh_add_physics](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_add_physics.m>)；2D同材七分区。MPH中eta_s=0和FperArea=0是未激活分支默认，实际材料lossfactor和TotalForce不能漏读|
+|FM-002 几何→坐标/曲线验收|m=2 BezierPolygon(type=solid,degree=[2 1 2 1],p控制点,w=10个1)；Rectangle；edgeParamRange/edgeX/edgeDX。实际edgeX/edgeDX为N×2，转换后与getVertexCoord的2×Nv区别；对曲线做有向边界积分|[abh_build_exact_geometry](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_build_exact_geometry.m>)；BezierPolygon在5.6已deprecated但本机支持，不外推m≠2或3D。顶点直连不能代替曲线积分|
+|FM-003 Map/Distribution→mesh.run→mphmeshstats|按实际顶点/邻接识别各域4边；Distribution的numelem；Map作用于实际域；检查完成、问题、quad数量和质量；位移形函数由Solid ShapeProperty/order_displacement读为2s|[abh_build_mapped_mesh](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_build_mapped_mesh.m>)；不得固定历史ID或混合numelem总和|
+|FM-004 Study Frequency→plist→Study.run|create freq/Frequency；set plist为17g显式递增列表；run后检查本模型实际唯一solver与dataset绑定；频率回读Hz核对|[abh_solve_frequencies](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_solve_frequencies.m>)；仅Case 4新模型/恢复链，没有验证Eigenfrequency/TimeDependent通用脚本|
+|FM-005 dataset→mphglobal/mphinterp→CSV/MAT|Solution数据集显式solution关联；dataset、solnum=all、complexout=on、unit和坐标；global积分intload/intfixed需显式opname；CSV17g回读，原MAT不丢复数|[abh_extract_response](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_extract_response.m>)；u/v变量与本接口绑定，v是位移|
+|FM-006 save→copy→load→readback/plot|mphsave显式新路径；唯一自有占位tag后mphload复制MPH；频率及全测点复数位移读回一致。PlotGroup2D实际支持solnum，不支持innerinput；properties/hasProperty可只读诊断|[abh_finalize_completed](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_finalize_completed.m>)、[abh_plot_results](<D:/test/abh_beam_2d/results/run_20261101_221156_379_76354718-01a8-438c-b1cf-7f3f1f82a2e3_postprocess/source/src/abh_plot_results.m>)；此次最终化未求解；任意MPH重求解UNVERIFIED|
+
+Case 4不接收返回值的`javaMethod('showProgress',ModelUtil类,filename)`已实际生成含求解内容的原生progress文件，可按该条件复用；完整“开启/关闭/异常收尾”通用框架闭环没有新增验证。它不是独立Server日志或OS stdout/stderr采集。
+官方5.6依据：材料/固体手册；几何`comsol_api_geom.44.060.html`；GeomInfo JavaDoc；Map `.45.77`、Distribution `.45.64`、Size `.45.83`；Result PlotGroup `.48.100`。具体属性以实际对象properties/hasProperty和对应5.6依据交叉确认，不能将同页其他类型的属性通用化。

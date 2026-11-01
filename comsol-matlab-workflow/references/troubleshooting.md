@@ -18,3 +18,7 @@
 新执行入口的 Standalone 合成任务与异常日志已验证，COMSOL 分支未执行。若入口本身失败，先查看 run_status.json 与 matlab_status.json 的职责，不把基础设施失败错误归因为科研模型。
 
 全局安装的共享知识路径和项目目录规则见 [global_scope.md](global_scope.md)。
+
+
+## Case 4 的阶段化修复索引
+见共享KI-009～012、DH-006及[Case 4](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)。材料API用lossfactor而非显示符号eta_s；edgeX/edgeDX实测N×2；绘图节点支持属性按properties/hasProperty确认，不能从同页不同类型表格照搬innerinput。绘图/导出失败后优先新目录读已有解，不重新扫频。历史结构数组初始化与窗口输入错误不归为物理模型失败；未收敛三角网格不得因求解完成而标通过。知识可信度以[统一五级定义](postprocessing_and_validation.md)为当前规范，早期PENDING/UNRESOLVED文字保留历史。

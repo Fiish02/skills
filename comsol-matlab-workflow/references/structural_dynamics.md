@@ -11,3 +11,7 @@
 |敏感性|参数尺度、扰动/差分步长、模态跟踪、目标定义|实际参数/求解状态、步长稳定性，避免模态换序冒充灵敏度|
 
 位移/速度/加速度和应力/应变表达式需从真实模型变量与5.6文档获取；不默认所有接口都有相同变量名。ABH最薄区/阻尼层优先根据尺度制定局部网格，不能固定通用单元数。
+
+
+## 当前结构频域的具体已验证入口
+早期“所有专业模板PENDING”是通用模板历史状态。[Case 4](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)的2D平面应力Frequency、复数位移FRF、Map网格比较和频率子集检查已在其条件下通过。模态、预应力、瞬态、速度/加速度的通用提取、3D与通用优化仍UNVERIFIED。用采样响应峰值代替Eigenfrequency结果是错误的；辅助梁理论不是COMSOL模态求解。

@@ -112,3 +112,13 @@ geom.run成功后核对维度、实体数、包围尺寸、连续性/自交/小�
 ## 强制参数入口补充（2026-11-01）
 
 config/model_config.m是唯一设计源；表达式几何引用同步全局参数，MATLAB坐标几何每次重新计算后再更新/构建。单改COMSOL参数不会更新旧Polygon坐标。实际A/B验证需单独批准，见parameter_management.md。
+
+## 本机已验证范围（2026-11-01）
+本页原API卡片的RUNTIME_NOT_TESTED是初始化快照。当前Rectangle、恒定法向曲梁、两端ABH的特定项目已有实际证据，见 [已验证曲梁流程](validated_curved_beam_workflow.md)及VS-009/010/011。Polygon source=vectors/type=solid与geom.run，实际getVertexCoord/getAdj重建闭环、三类面积/收敛/厚度/自交复核可按版本和场景复用。旧通用几何示例本身未逐一执行，不整体标VERIFIED。
+getVolume警告见共享GV-001/KI-008：保留原值，使用实际COMSOL连接/坐标与理论及Python核验。ABH根部C0折角不擅自平滑，1.5采样权重非通用默认；两端基准不替代论文内部ABH。复杂多域先验收基体，不能自动加阻尼/物理。
+
+
+## Case 4：直梁单端二次ABH的新增验证
+[Case 4](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)使用七个同材二维分区：直段Rectangle，m=2渐薄段BezierPolygon，上下边界y=±h(x)/2，非曲梁法向偏置。16个实际几何顶点与22条边；曲线由edgeParamRange/edgeX/edgeDX实际求值，边界积分和独立Python Simpson复核。m≠2的Polygon后备分支没有因此获得同等频域验证。
+这是单端直梁构型，不替代VS-011的两端曲梁，也不替代论文内部ABH。精确曲线面积不可由16个顶点直连代替；getVolume原生精度WARNING仍保留。
+三维几何、实体拉伸/扫掠、异材界面及内部ABH仍按各自UNVERIFIED边界处理；新建多域须记录Union共享边界或Assembly配对，并复核实际域/材料选择。

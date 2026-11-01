@@ -49,3 +49,13 @@ Server 日志不自动读取未知安装/用户位置，不收集 login.properti
 ## 强制参数入口补充（2026-11-01）
 
 参数化不改变连接协议。先从集中配置生成独立run和实际配置/源码快照、parameters.json；同步回读通过后才建模。历史GUI输入授权不等于本轮文档任务获准新仿真。
+
+## 已执行的现有Server连接恢复（2026-11-01，VS-011证据）
+ABH首次会话mli可解析但ModelUtil Java不可见，mphversion失败；先诊断而非盲目开服务。用户明确批准后，在现有R2023a执行mphstart(address,port,COMSOL安装根)，连接已核实的既有服务，之后mphversion核对5.6 Build280且ModelUtil.tags成功，再进行建模。证据：[报告](<D:/test/comsol-matlab-workflow-abh-curved-beam-test/run_20261101_190839_544_63b3c800-2823-47ea-8ea4-c25f824036b3/report.md>)及其logs/server_connection_status.json。
+127.0.0.1:2036、Server PID26924和MATLAB PID21036只记录当时事实，不作为下次默认值。每次先查实际路径/服务/端点；改变连接状态须遵循授权，不自动重连/新建Server。mli存在与GUI打开不证明LiveLink已初始化；类缺失本身也不证明网络/许可证根因。认证与diary分开，不读login.properties，不记录账户/许可密码，不改Preferences/pathdef/注册表/环境变量。
+此为一次本机连接恢复记录，不是跨环境自动重连配方；窗口输入方法也依赖前台/布局，不升级为无人值守通用能力。
+
+
+## Case 4：既有会话提交与日志的有限实测
+历史[Case 4](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)通过已运行窗口查询release/root/mphversion确认连接，Windows原子Unicode SendInput提交到已核实PID和主窗口；慢速SendKeys/定向WM_CHAR及COM附加尝试未形成可靠执行回执。提交成功不等于执行成功，必须读取实际状态/产物。历史PID、窗口句柄和端口不能作下次默认；焦点控制依赖交互桌面，不能升级无人值守Batch能力。
+本案例showProgress(String)无返回值形式实际写出原生求解进度，但未增加完整关闭/异常收尾验证。键盘中断在原生求解返回后才生效，旧RUNNING状态可能陈旧；必须结合原生日志和实际解判断，不能杀共享进程或将恢复导出称为新求解。文档升级不执行这些操作。

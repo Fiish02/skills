@@ -20,3 +20,11 @@
 ## 跨项目记录格式
 
 记录问题编号、日期、版本、场景、原因证据、修改、验证、适用范围，以及完整的项目路径/run ID/日志位置。只有实测可复核方案进入 validated_solutions。没有文件写权限时读取现有记录，将新增草稿保存在当前可写项目并说明待合并，不改系统配置解决权限。
+
+
+## 2026-11-01 全局发现与本次归档
+本次会话提供的可用Skill目录、用户显式调用路径与文件系统均指向 `C:/Users/14289/.agents/skills/comsol-matlab-workflow`；其目录及父级检查无符号链接/Junction目标。用户 `.codex/skills` 只有系统Skill子目录；当前项目及扫描到的插件位置未发现第二份同名有效SKILL.md。实际配置无该Skill的禁用项。检查范围和哈希见共享知识库更新报告，不能据此宣称扫描过全盘或验证过新会话自动触发。
+
+OpenAI官方[本地Skill发现说明](https://developers.openai.com/codex/skills/)列出用户 `$HOME/.agents/skills` 与项目 `.agents/skills` 范围；此处以当前会话目录和实际文件核对为决定依据。项目根继续取当前工作目录，不从全局Skill路径推导。
+
+主知识库仍为 `C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge`。新增[Case 4详细记录](<C:/Users/14289/Documents/Codex/COMSOL_MATLAB_Knowledge/knowledge/validated_2d_abh_frequency_domain.md>)与`update_reports/global_skill_upgrade_report.md`均放在此主库；Skill只建立链接，不复制出第二套同名知识。此次只增量编辑文档，不改变scripts/examples执行逻辑，不新建同名已安装Skill。
