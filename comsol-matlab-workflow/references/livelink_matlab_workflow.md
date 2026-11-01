@@ -39,3 +39,13 @@ Server 日志不自动读取未知安装/用户位置，不收集 login.properti
 任务结束保留原会话，模板不 disconnect、clear 或 remove 用户模型，不抢占其他会话。停止/中断共享会话前核实归属并与用户沟通。
 
 全局安装的共享知识路径和项目目录规则见 [global_scope.md](global_scope.md)。
+
+
+## 当前默认策略（2026-11-01修订）
+历史已连接GUI中真实PDE成功，不保证此刻仍连接。常规科研任务只需复用该工作方式并在执行窗口查询release/root/mphversion；无连接则请用户按其已验证方式建立后等待。不将无人值守/Server网络认证作为必要前置。
+命令行帮助已成功采集：D:/test/comsol-matlab-workflow-unattended/run_20261101_140524/phase1_help_review.md。mlroot/port/portfile/prefsdir等为HELP_CONFIRMED，不是安全服务运行通过；仅回环绑定及无交互认证尚未确认，端到端Batch未执行。OPTIONAL / OUT OF SCOPE，旧自动化笔记保留但不得阻塞已连接科研仿真。
+
+
+## 强制参数入口补充（2026-11-01）
+
+参数化不改变连接协议。先从集中配置生成独立run和实际配置/源码快照、parameters.json；同步回读通过后才建模。历史GUI输入授权不等于本轮文档任务获准新仿真。

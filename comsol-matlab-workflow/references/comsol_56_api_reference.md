@@ -1,6 +1,6 @@
 # COMSOL 5.6 API 关系与调用卡片
 
-证据层级：本文件为 DOC_VERIFIED（本机 5.6 HTML 已核对），所有下面的模型调用仍为 RUNTIME_NOT_TESTED；未执行科研模型。最小调用是有前置条件的片段，不是可独立求解的通用模型。
+证据层级：以下原始卡片在初始化时完成本机5.6文档核对；它们作为通用片段仍未逐项实测。此后1D PDE完整案例已真实求解，具体实测调用及适用范围以共享validated_solutions VS-003～008和regression_test_cases为准。不能将旧卡片的RUNTIME_NOT_TESTED理解为从未完成FEM，也不能把案例通过扩展为所有示例已验证。最小调用是有前置条件的片段。
 
 关系：已连接 MATLAB → ModelUtil/模型引用 → 全局参数与组件 → Geometry/Physics/Materials/Mesh → Study 控制求解问题 → Solver 计算解 → Results dataset → mphglobal/mphinterp/mpheval 数值。参数变更会使几何、网格或解失效，依赖范围由实际模型决定。
 
@@ -237,3 +237,7 @@ Physics 示例使用的标量字符串读取 `feature.getString(property)` 已�
 ## 尚不能通用指定的参数
 
 具体 Physics 特征类型、材料属性组与键、边界选择、Study 类型的特定属性、求解容差和评价表达式，必须从原模型及 5.6 对应模块文档获取。禁止把教程的 solid/acpr/freq 等名称直接移植为任意模型的事实。所需字段见 examples 的显式参数。
+
+
+## 几何与专业分析补充索引
+几何重要API的本机5.6章节、对象/输入/顺序和状态见geometry_modeling.md，具体Rectangle/Polygon调用见examples。模型createUnique在现有1D基线实测；其他几何对象的文档存在不代表运行通过。材料、Multiphysics、具体网格/Study特征和专业表达式需physics_and_solver.md指定的逐项卡片；未知键标PENDING，不以方向名称冒充API。mphplot先核实本机mli/mphplot.m及5.6同名LiveLink章节的输入输出再使用。

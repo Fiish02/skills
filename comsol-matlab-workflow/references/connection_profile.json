@@ -29,5 +29,26 @@
   "headless_automation_status": "NOT TESTED",
   "server_port": "NOT RECORDED",
   "livelink_product_authorization_query": "NOT TESTED; connection PASS is not a hasProduct result",
-  "retest_basic_compatibility": false
+  "retest_basic_compatibility": false,
+  "connection_status_scope": "HISTORICAL_PASS_ONLY; active GUI/connection must be checked at execution time",
+  "fem_regression_evidence": {
+    "status": "HISTORICAL_RUNTIME_PASS",
+    "report": "D:\\test\\comsol-matlab-workflow-test\\run_20261101_133305_retry02\\report.md",
+    "knowledge_ids": [
+      "VS-003",
+      "VS-004",
+      "VS-005",
+      "VS-006",
+      "VS-007",
+      "VS-008"
+    ],
+    "current_connection": "NOT CHECKED DURING SKILL EDIT"
+  },
+  "headless_automation_scope": "OPTIONAL / OUT OF SCOPE for normal connected research simulation; end-to-end still NOT TESTED",
+  "help_check_evidence": {
+    "status": "HELP_CONFIRMED_ONLY",
+    "report": "D:\\test\\comsol-matlab-workflow-unattended\\run_20261101_140524\\phase1_help_review.md",
+    "loopback_binding": "NOT CONFIRMED",
+    "unattended_authentication": "NOT TESTED"
+  }
 }

@@ -1,4 +1,6 @@
 function audits = parameter_sweep(model, parameter, expressions, runDir, executeApprovedPoint, authorized)
+% Values must come from config/model_config.m; archive cfg/sync for each run.
+% Low-level adapter, not a second independent design-parameter source.
 % DOC_VERIFIED primitive calls: param.get/set 5.6. RUNTIME_NOT_TESTED.
 % executeApprovedPoint(model,pointDir) must rebuild approved dependencies,
 % solve the approved sequence, save outputs and return validation.status/checks.

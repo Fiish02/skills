@@ -13,7 +13,7 @@
 | Solver | solver progress、参数快照、依赖、收敛/迭代与状态 | 参数/边界/网格/求解策略变化需讨论 |
 | 提取/验收 | dataset、solnum/outersolnum/t、单位、shape、NaN/Inf | 不把插值失败 NaN 自动填零，不误取旧解 |
 
-修复闭环：现象→可复现条件→原因证据（未知则明确未知）→候选修复→授权范围→最小修改→新目录重跑→相同验收标准比较→知识库去重追加。OPEN、PROPOSED、VALIDATED 分开；反例使既有方案失效时追加边界和失效证据，不静默删除历史。
+修复闭环：现象→可复现条件→原因证据（未知则明确未知）→候选修复→授权范围→最小修改→新目录重跑→相同验收标准比较→知识库去重追加。知识主记录统一VERIFIED、PENDING、UNRESOLVED：候选修复与根因未知分别保留，旧OPEN/PROPOSED/VALIDATED只作为历史状态，不作新条目分类；反例使既有方案失效时追加边界和失效证据，不静默删除历史。
 
 新执行入口的 Standalone 合成任务与异常日志已验证，COMSOL 分支未执行。若入口本身失败，先查看 run_status.json 与 matlab_status.json 的职责，不把基础设施失败错误归因为科研模型。
 
