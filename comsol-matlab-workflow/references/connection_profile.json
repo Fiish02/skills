@@ -1,0 +1,33 @@
+{
+  "recorded_date": "2026-11-01",
+  "connection_status": "PASS",
+  "evidence_kind": "USER_EXECUTED_RESULTS_PROVIDED_IN_CHAT",
+  "matlab_release": "2023a",
+  "matlab_root": "D:\\Program Files\\MATLAB\\R2023a",
+  "comsol_version": "5.6",
+  "comsol_build": 280,
+  "comsol_root": "D:\\Program Files\\COMSOL\\COMSOL56\\Multiphysics",
+  "mli": "D:\\Program Files\\COMSOL\\COMSOL56\\Multiphysics\\mli",
+  "checks_provided": [
+    "version(-release)",
+    "matlabroot",
+    "mphversion",
+    "which mphstart -all"
+  ],
+  "mphstart_resolution": {
+    "preferred": "mphstart.p",
+    "same_directory_m_help": "Shadowed; expected; preserve both"
+  },
+  "candidate_shortcut": {
+    "status": "DISCOVERED_AND_READONLY_INSPECTED",
+    "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\COMSOL Multiphysics 5.6\\COMSOL Multiphysics 5.6 with MATLAB.lnk",
+    "target": "D:\\Program Files\\COMSOL\\COMSOL56\\Multiphysics\\bin\\win64\\comsolmphserver.exe",
+    "arguments": "matlab",
+    "working_directory": "D:\\Program Files\\COMSOL\\COMSOL56\\Multiphysics",
+    "is_source_of_successful_session": "NOT CONFIRMED"
+  },
+  "headless_automation_status": "NOT TESTED",
+  "server_port": "NOT RECORDED",
+  "livelink_product_authorization_query": "NOT TESTED; connection PASS is not a hasProduct result",
+  "retest_basic_compatibility": false
+}
